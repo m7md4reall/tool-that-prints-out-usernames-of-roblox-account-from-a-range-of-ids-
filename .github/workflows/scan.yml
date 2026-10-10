@@ -1,0 +1,41 @@
+
+name: Roblox Account Hunter
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependency
+        run: pip install requests
+
+      - name: Scan Roblox IDs
+        run: python -u scanner.py
+        env:
+          START_ID: "261167905"
+          END_ID: "261963978"
+          PYTHONUNBUFFERED: "1"
+
+      - name: Save scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: roblox-account-scan-results
+          path: results/
+          if-no-files-found: ignore
+          retention-days: 14
