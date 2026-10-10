@@ -6,7 +6,7 @@ from pathlib import Path
 
 import requests
 
-START_ID = int(os.getenv("START_ID", "261167905"))
+START_ID = int(os.getenv("START_ID", "261365405"))
 END_ID = int(os.getenv("END_ID", "261963978"))
 BATCH_SIZE = 100
 PAUSE_SECONDS = 0.8
